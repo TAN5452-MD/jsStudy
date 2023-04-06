@@ -16,3 +16,7 @@ const small = Number(bigInt)
 const foo = undefined
 //只有前面的为undefined和null的时候才会出发 空字符串的时候不会（但如果使用 ｜｜ 会判定为0 因为空字符串==0）
 const bar = foo ?? "default value"
+
+//获取全局对象
+//在不同的环境下会有不同的全局对象
+console.log(globalThis);
