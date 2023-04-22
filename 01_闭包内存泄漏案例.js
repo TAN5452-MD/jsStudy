@@ -6,7 +6,6 @@ function createFnArray(){
         console.log(arr.length)
     }
 }
-
 //如果不置为null会造成内存泄漏
 let arr = []
 for(let i =1 ; i<100 ;i++){
