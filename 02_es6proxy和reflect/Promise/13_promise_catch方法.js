@@ -53,7 +53,9 @@ class myPromise {
     }
     then(onFulfilled,onReject){
         //如果为空就手动抛出异常 这样第二个promise就能捕捉到
-        onReject = onReject ?? (err => {throw err})
+        onReject = onReject || (err => {throw err})
+        
+        onFulfilled = onFulfilled || (value => {return value})
 
         //为了实现链式调用 需要返回promise
         return new myPromise((resolve,reject) => {
@@ -70,7 +72,6 @@ class myPromise {
         if(this.status === PROMISE_STATUS_PENDINGI){
         //由于需要拿到返回值再reslove 所以这里用回调函数处理一下
        onFulfilled &&  this.onFulfilledFns.push(()=>{
-           
             execFunctionWithCatchError(onFulfilled, this.value, resolve, reject)
         }) 
         onReject && this.onRejectFns.push(()=>{
@@ -80,19 +81,26 @@ class myPromise {
     })
     }
     catch(onReject){
+        //catch也是返回一个promise 所以需要return
         return this.then(null,onReject)
+    }
+    finally(onFinally){
+         this.then(onFinally,onFinally)
+
     }
     }
 
 
 const promise = new myPromise((resolve,reject)=>{
-   resolve("123")
-   // reject("456")
+   //resolve("123")
+    reject("456")
     // throw new Error("789")
 })
 
 promise.then(res=>{
     console.log(res);
 }).catch(err=>{
-
+    console.log(err);
+}).finally(()=>{
+    console.log("finally");
 })
