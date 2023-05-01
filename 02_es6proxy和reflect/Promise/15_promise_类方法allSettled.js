@@ -99,8 +99,46 @@ class myPromise {
            return reject(reason)
         })
     }
-    static allSettled(){
-       
+    //有reject就返回reject的值
+    static all(promises){
+        return new myPromise((resolve,reject)=>{
+            const value = []
+            promises.forEach(promise => {
+               promise.then(res=>{
+                   value.push(res)
+                   if(value.length === promises.length){
+                       resolve(value)
+                   }
+               },err => {
+                   reject(err)
+               }) 
+            })
+        })
+    }
+    //拿到所有结果再返回
+    static allSettled(promises){
+          return new myPromise((resolve,reject)=>{
+            const results = []
+            promises.forEach(promise => {
+               promise.then(res=>{
+                   results.push({
+                       status:PROMISE_STATUS_FULFILLED,
+                       value:res
+                   })
+                   if(results.length === promises.length){
+                       resolve(value)
+                   }
+               },err => {
+                   results.push({
+                       status:PROMISE_STATUS_REJECT,
+                       value:res
+                   })
+                   if(results.length === promises.length){
+                       resolve(value)
+                   }
+               }) 
+            })
+        })
     }
 }
 
