@@ -15,6 +15,9 @@ function requestData(url) {
   })
 }) */
 
+
+
+//第二种方案
 function* requestGenerator(a,b,c){
   const r1 = yield requestData(a)
   const r2 = yield requestData(r1+b)
@@ -47,3 +50,21 @@ function execGenerator(fn){
 execGenerator(requestGenerator)
 
 //类似的库 -- co
+/* 
+  const co = require('co')
+  co(getData)
+*/
+
+
+//第四种方案 async/await
+
+async function getData(){
+  const res1 = await requestData("1")
+  const res2 = await requestData(res1+"21")
+  const res3 = await requestData(res2+"31")
+  const res4 = await requestData(res3+"31")
+  console.log(res4);
+}
+
+getData()
+
