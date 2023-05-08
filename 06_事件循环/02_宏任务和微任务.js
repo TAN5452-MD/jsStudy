@@ -29,6 +29,8 @@ macro
 
 Promise.resolve().then(() => {
     //如果返回的是一个thenable 对象或者不是一个普通的值会多加一次微任务
+    //如果返回的是一个普通的值，那么会直接执行下一个微任务
+    //如果返回的是一个promise对象，会推迟2次微任务，因为不是前2种情况会推迟一次微任务，如果再return一个promise会继续推迟一次
     return {
         then: function (resolve, reject) {
             resolve(1)
