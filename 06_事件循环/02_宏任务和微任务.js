@@ -15,6 +15,23 @@ setTimeout(() => {
 //规范：在执行任何的宏任务之前，都需要先保证微任务队列为空
 //     如果不为空，那么就优先执行微任务队列的回调
 
-
-
+//切记如果await函数没有返回值，则默认返回undefined
 //如何做相关面试题 先写出main script队列 再去分析宏任务队列， 再写出微任务队列
+
+
+
+
+
+mian task    
+micro 0  1 2 3 5 6 4
+macro
+
+
+Promise.resolve().then(() => {
+    //如果返回的是一个thenable 对象或者不是一个普通的值会多加一次微任务
+    return {
+        then: function (resolve, reject) {
+            resolve(1)
+        }
+    }
+})
