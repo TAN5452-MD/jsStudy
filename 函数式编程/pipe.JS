@@ -34,5 +34,10 @@ const computed = pipe(add4,multiply3,divide2)
 console.log(computed(0));
 
 
-
 //主要作用:减少计算中间态 摆脱回调地域 构造声明式的数据流
+
+
+//另一种写法
+function pipe2(...fns){
+  return fns.reduce( (f,g) => (...arg) => g(f(arg)))
+}
