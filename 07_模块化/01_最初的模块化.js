@@ -27,3 +27,18 @@ exports = module.exports
       模块被多次引入会缓存，只加载一次(每个module文件都有一个loaded 根据这个布尔值查看是否加载过)
       加载顺序为深度优先 
 */
+
+
+
+
+/* 
+            import 引入里面的内容解析完之前后续的代码都不会执行。
+            也可以采用不阻塞的写法 把improt写成一个函数 也就是懒加载
+
+*/
+
+//如果是函数的话返回的是一个promise
+import('./a.js').then(data=>{})
+
+//es11新增特性
+console.log(import.meta.url); //当前模块所在的路径
