@@ -6,6 +6,7 @@
 const promise = new Promise((
     resolve,
     reject
+
 )=>{
     console.log('promise传入的函数被执行了')
 })
