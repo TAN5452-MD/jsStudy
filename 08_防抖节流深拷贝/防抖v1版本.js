@@ -8,3 +8,10 @@ function debounce(fn, delay){
   }
 }
 
+function A(){
+  console.log(this);
+}
+
+const a = debounce(A,100)
+a()
+

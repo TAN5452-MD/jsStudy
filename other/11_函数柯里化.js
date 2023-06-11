@@ -9,6 +9,7 @@ function foo(x){
 }
 
 let result = foo(1)(2)(3)(4)
+console.log(result);
 
 //柯里化的简写
 const sum = x => y => z => s => {
